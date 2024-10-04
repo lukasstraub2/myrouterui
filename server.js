@@ -3,7 +3,7 @@
 // TODO: jslint
 
 const port = 8081;
-const base_dir = "test";
+const base_dir = "/var/lib/myrouterui";
 
 import * as http from "http";
 import * as child_process from "child_process";
