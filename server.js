@@ -297,10 +297,10 @@ function main() {
             server.on("listening", () => {
                 if (process.getuid && process.setuid && process. seteuid && process.setgid && process.setegid) {
                     if (process.getuid() === 0) {
-                        process.setuid("myrouterui");
-                        process.seteuid("myrouterui");
                         process.setgid("myrouterui");
                         process.setegid("myrouterui");
+                        process.setuid("myrouterui");
+                        process.seteuid("myrouterui");
                     }
                 } else {
                     throw new Error("setuid not available");
