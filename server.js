@@ -2,7 +2,7 @@
 
 // TODO: jslint
 
-const port = 8081;
+const port = 80;
 const base_dir = "/var/lib/myrouterui";
 
 import * as http from "http";

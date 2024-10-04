@@ -144,25 +144,25 @@ function handle_message(message) {
     switch (message.exec) {
         case "enable_reading":
             // now + 45 minutes
-            var ts = now().setMinutes(now().getMinutes() + 45) / 1000;
+            var ts = now().setMinutes(now().getMinutes() + 45) / 1000 >>> 0;
             var ret = do_nft("enable_reading_policy", `meta time < ${ts} accept`);
         break;
 
         case "override":
             // now + 30 minutes
-            var ts = now().setMinutes(now().getMinutes() + 30) / 1000;
+            var ts = now().setMinutes(now().getMinutes() + 30) / 1000 >>> 0;
             var ret = do_nft("override_policy", `meta time < ${ts} accept`);
         break;
 
         case "override5":
             // now + 5 minutes
-            var ts = now().setMinutes(now().getMinutes() + 5) / 1000;
+            var ts = now().setMinutes(now().getMinutes() + 5) / 1000 >>> 0;
             var ret = do_nft("override_policy", `meta time < ${ts} accept`);
         break;
 
         case "lockdown":
             // now + 2 hours
-            var ts = now().setHours(now().getHours() + 2) / 1000;
+            var ts = now().setHours(now().getHours() + 2) / 1000 >>> 0;
             var ret = do_nft("lockdown_policy", `meta time < ${ts} jump mark_reject`);
         break;
 
