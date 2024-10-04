@@ -189,7 +189,7 @@ function rearm_tomorrow(now) {
  */
 function rearm_monday(now) {
     let tmp = now();
-    tmp.setDate(tmp.getDate() + (((1 + 7 - tmp.getDay()) % 7) || 7));
+    tmp.setDate(now().getDate() + (((1 + 7 - now().getDay()) % 7) || 7));
     tmp.setHours(2, 0, 0, 0);
     return immutDate(tmp);
 }
