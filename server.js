@@ -255,7 +255,7 @@ function handle_action(child, url, response) {
             break;
 
             case "override5":
-                var left = count_check("override5", 6, rearm_monday(now));
+                var left = count_check("override5", 6, rearm_tomorrow(now));
                 if (left < 0) {
                     response_blocked(response, "Override blocked");
                     return;
