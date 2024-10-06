@@ -73,7 +73,7 @@ function rearm_read(name) {
 function count_check(name, count, next_rearm) {
     const now = immutDate(new Date());
 
-    const left = count_read(name, count);
+    let left = count_read(name, count);
     const rearm = rearm_read(name);
 
     if (now().valueOf() < rearm && left === 0) {
@@ -81,6 +81,7 @@ function count_check(name, count, next_rearm) {
     }
 
     if (now().valueOf() >= rearm) {
+        left = count;
         fs.writeFileSync(rearm_file(name), next_rearm().valueOf().toString());
     }
 
