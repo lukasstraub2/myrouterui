@@ -1,0 +1,13 @@
+[Unit]
+After=network.target
+
+[Service]
+StateDirectory=myrouterui
+DynamicUser=true
+User=myrouterui
+Group=myrouterui
+Type=simple
+ExecStart=!/usr/bin/node /opt/myrouterui/server.js
+
+[Install]
+WantedBy=multi-user.target
