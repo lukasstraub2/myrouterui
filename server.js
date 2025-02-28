@@ -158,6 +158,8 @@ function handle_request(child, request, response) {
     <a href="action?enable_reading">Override reading sites (45 minutes)</a> left: ${count_read("enable_reading", 3)} <br>
     <a href="action?override">Override (30 minutes)</a> left: ${count_read("override", 1)} <br>
     <a href="action?override5">Override (5 minutes)</a> left: ${count_read("override5", 6)} <br>
+    <a href="action?reddit">Override Reddit (30 minutes)</a> left: ${count_read("reddit", 2)} <br>
+    <a href="action?reddit5">Override Reddit (5 minutes)</a> left: ${count_read("reddit5", 6)} <br>
     <a href="action?lockdown">Lockdown (2 hours)</a><br>
 </body>
 </html>
@@ -214,7 +216,7 @@ function exec_callback_nocount(err, nftresponse, response) {
  * @param {Error | null} err 
  * @param {import("./nftchild.js").NftResponse | null} nftresponse 
  * @param {http.ServerResponse<http.IncomingMessage>} response 
- * @param {import("./nftchild.js").NftRequest & ("enable_reading" | "override" | "override5")} nftrequest
+ * @param {import("./nftchild.js").NftRequest & ("enable_reading" | "override" | "reddit" | "reddit5" | "override5")} nftrequest
  * @param {number} left
  */
 function exec_callback_count(err, nftresponse, response, nftrequest, left) {
@@ -257,6 +259,22 @@ function handle_action(child, url, response) {
 
             case "override5":
                 var left = count_check("override5", 6, rearm_tomorrow(now));
+                if (left < 0) {
+                    response_blocked(response, "Override blocked");
+                    return;
+                }
+            break;
+
+            case "reddit":
+                var left = count_check("reddit", 2, rearm_tomorrow(now));
+                if (left < 0) {
+                    response_blocked(response, "Override blocked");
+                    return;
+                }
+            break;
+
+            case "reddit5":
+                var left = count_check("reddit5", 6, rearm_tomorrow(now));
                 if (left < 0) {
                     response_blocked(response, "Override blocked");
                     return;

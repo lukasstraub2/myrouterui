@@ -2,7 +2,7 @@
 import * as child_process from "child_process";
 import { assert, assertNever, immutableDate } from "./util.js";
 
-/** @typedef {"enable_reading" | "override" | "override5" | "lockdown"} NftRequest */
+/** @typedef {"enable_reading" | "override" | "override5" | "reddit" | "reddit5" | "lockdown"} NftRequest */
 /** @typedef {{exec: NftRequest}} NftRequestMsg */
 
 /** @typedef {"success" | "error"} NftResponse */
@@ -15,7 +15,7 @@ import { assert, assertNever, immutableDate } from "./util.js";
 export function isNftRequest(obj) {
     return (
         obj !== null && typeof obj === "string" && 
-        (obj === "enable_reading" || obj === "override" || obj === "override5" || obj === "lockdown")
+        (obj === "enable_reading" || obj === "override" || obj === "override5" || obj === "reddit" || obj === "reddit5" || obj === "lockdown")
     );
 }
 
@@ -158,6 +158,18 @@ function handle_message(message) {
             // now + 5 minutes
             var ts = now().setMinutes(now().getMinutes() + 5) / 1000 >>> 0;
             var ret = do_nft("override_policy", `meta time < ${ts} accept`);
+        break;
+
+        case "reddit":
+            // now + 30 minutes
+            var ts = now().setMinutes(now().getMinutes() + 30) / 1000 >>> 0;
+            var ret = do_nft("reddit_policy", `meta time < ${ts} accept`);
+        break;
+
+        case "reddit5":
+            // now + 5 minutes
+            var ts = now().setMinutes(now().getMinutes() + 5) / 1000 >>> 0;
+            var ret = do_nft("reddit_policy", `meta time < ${ts} accept`);
         break;
 
         case "lockdown":
