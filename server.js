@@ -161,6 +161,7 @@ function handle_request(child, request, response) {
     <a href="action?reddit">Override Reddit (30 minutes)</a> left: ${count_read("reddit", 2)} <br>
     <a href="action?reddit5">Override Reddit (5 minutes)</a> left: ${count_read("reddit5", 6)} <br>
     <a href="action?lockdown">Lockdown (2 hours)</a><br>
+    <a href="action?override_trackers">Override Trackers (30 minutes)</a> <br>
 </body>
 </html>
 `);
@@ -287,6 +288,12 @@ function handle_action(child, url, response) {
                 });
                 return;
             break;
+
+            case "override_trackers":
+                child.execute({exec: "override_trackers"}, (err, nftresponse) => {
+                    exec_callback_nocount(err, nftresponse, response);
+                });
+                return;
 
             default:
                 assertNever(query);
